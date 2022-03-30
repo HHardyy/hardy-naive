@@ -8,7 +8,7 @@
  * 创建一个单向链表
  * @param { list } Array
 */
-module.exports.createLinkList = function (list = []) {
+exports.createLinkList = function (list = []) {
   let len = list.length
   if (!len || len === 0) throw new Error('list is empty')
   let currNode = { value: list[len - 1] }
@@ -26,7 +26,7 @@ module.exports.createLinkList = function (list = []) {
  * 反转单向链表
  * @param { linkListNode } 一个单向链表
 */
-module.exports.reverseLinkList = function (linkListNode = null) {
+exports.reverseLinkList = function (linkListNode = null) {
   if (!linkListNode) throw new Error('linkListNode is not a linkNode')
   let prevNode = undefined, currNode = undefined, nextNode = linkListNode
 

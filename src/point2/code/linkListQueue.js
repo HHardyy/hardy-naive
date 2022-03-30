@@ -45,4 +45,4 @@ LinkListQueue.prototype._length = function () {
   return this.length
 }
 
-module.exports.LinkListQueue = LinkListQueue
+exports.LinkListQueue = LinkListQueue

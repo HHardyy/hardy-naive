@@ -10,7 +10,7 @@
  * @param {list} Array
  * @param {number} n
 */
-module.exports.findTowNumber1 = function (list = [], n) {
+exports.findTowNumber1 = function (list = [], n) {
   const res = []
   const len = list.length
   if (len === 0) return res
@@ -36,7 +36,7 @@ module.exports.findTowNumber1 = function (list = [], n) {
 /**
  * 双指针，复杂度降到O(n)
 */
-module.exports.findTowNumber2 = function (list = [], n) {
+exports.findTowNumber2 = function (list = [], n) {
   const res = []
   const len = list.length
   if (len === 0) return res

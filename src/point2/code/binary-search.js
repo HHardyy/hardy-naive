@@ -2,9 +2,9 @@
  * @Author: 小方块 
  * @Date: 2022-03-28 01:57:33 
  * @Last Modified by: 小方块
- * @Last Modified time: 2022-03-28 02:29:16
+ * @Last Modified time: 2022-03-30 23:45:42
  */
-module.exports.binarySearchForEach = function (list = [], index = 0) {
+exports.binarySearchForEach = function (list = [], index = 0) {
   let len = list.length
   if (!len || len === 0) return -1
 
@@ -32,7 +32,7 @@ function binarySearchRecursion(list = [], index, startIndex, endIndex) {
 
   if (startIndex == null) startIndex = 0
   if (endIndex == null) endIndex = len - 1
-  
+
   if (startIndex > endIndex) return -1
 
   const mindIndex = Math.floor((startIndex + endIndex) / 2)
@@ -47,4 +47,4 @@ function binarySearchRecursion(list = [], index, startIndex, endIndex) {
   }
 }
 
-module.exports.binarySearchRecursion = binarySearchRecursion
+exports.binarySearchRecursion = binarySearchRecursion
