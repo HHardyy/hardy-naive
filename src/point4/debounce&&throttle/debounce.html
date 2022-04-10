@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="handleDebounce()">防抖</button>
+  <div style="width: 100px; height: 50px; padding: 10px; background-color: #ccc;" draggable="true" id="dragBox">拖拽 节流</div>
+  <!-- <button onclick="handleThrottle()">节流</button> -->
+  <script>
+    let debounceHandle = debounce(sayHello)
+    let throttleHandle = throttle(sayHello)
+
+    function handleDebounce(){
+      debounceHandle('nihao')
+    }
+    function handleThrottle(){
+      throttleHandle('nihao 1')
+    }
+    dragBox.addEventListener('drag', (e) => {
+      throttleHandle('drag', e.offsetX, e.offsetY)
+    })
+
+    function sayHello(){
+      console.log('say hello, ', ...arguments);
+    }
+
+    function debounce(fn, delay = 200){
+      let timer = 0
+      return function(){
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          timer = 0
+        }, delay);
+      }
+    }
+
+    function throttle(fn, delay = 100) {
+      let timer = 0
+      return function (){
+        if (timer) return
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          timer = 0
+        }, delay);
+      }
+    }
+  </script>
+</body>
+</html>

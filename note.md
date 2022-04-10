@@ -118,19 +118,85 @@ JS代码执行时
 - 堆的数据，都是在栈中引用的， 不需要从root遍历
 - 堆恰巧是数组形式， 根据栈的地址， 可用O(1)找到目标 
 
+### 基础面试题 （point 4）
+####  ajax， fetch, axios的区别？
+####  箭头函数的缺点， 哪里不能用箭头函数?
+####  Vue组件通讯方式有几种？尽量说全面
+#### 节流和防抖
+- 两者有什么区别
+- 分别用于什么场景
+##### 防抖
+限制执行次数， 多次密集的触发只执行一次
+##### 节流
+限制执行频率， 有节奏执行
+> 节流关注“过程”， 防抖关注“结果”
 
+#### px % em rem vw/vh 有什么区别
+- px 基本单位， 绝对单位
+- %  相对于父元素的宽度比例
+- em 相对于当前元素的font-size
+- rem 相对于根节点的font-size
+- vw / vh  屏幕宽度的1% /  屏幕高度的1% (vmin  两者的最小值， vmax两者的最大值)
 
+#### 箭头函数
+- 箭头函数有什么缺点？
+- 什么时候不能使用箭头函数？
 
+缺点：
+```javascript
+1、没有arguments
+2、没法通过call、apply、bind改变this，this永远指向定义的时候的父级作用域
+3、很low的写法
+demo1: 写的比较迷 
+const fn = (a, b) => b === undefined ? b => a * b : a * b
 
+demo2: 对象的方法不能使用箭头函数
+const obj = {
+  name: 'hardy',
+  getName: () => {
+    return this.name
+  }
+}
+console.log(obj.getName())  // 空
 
+demo3: 原型上的方法
+const obj = { name: 'hardy' }
+obj.__proto__.getName = () => {
+  return this.name
+}
+console.log(obj.getName())  // 空
 
+demo4: 构造函数也不能使用
+const Foo = (name, age) => {
+  this.name = name
+  this.age = age
+}
+const f = new Foo('hardy', 18)
 
+demo5: 动态上下文中的回调函数
+const btn = document.querySelector('#btn')
+btn.addEventListener('click', () => {
+  this.innerHTML = 'clicked'
+})
 
-
-
-
-
-
+demo6: Vue的生命周期和method也不行
+{
+  data(){
+    return {
+      name: 'hardy'
+    }
+  },
+  methods: {
+    getName: () => {
+      return this.name
+    }
+  },
+  mounted: () => {
+    console.log('msg', this.name)
+  }
+}
+！！！ 因为vue组件本质上是一个js对象， 但是react可以， 因为react组件（非hooks）本质上是一个ES6的class
+```  
 
 
 
