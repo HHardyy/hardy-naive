@@ -197,10 +197,73 @@ demo6: Vue的生命周期和method也不行
 }
 ！！！ 因为vue组件本质上是一个js对象， 但是react可以， 因为react组件（非hooks）本质上是一个ES6的class
 ```  
+#### for in 和 for of 有什么区别
+- 遍历对象： for in 可以， for of 不可以
+- 遍历Map, Set: for of 可以， for in 不可以
+- 遍历generator: for of 可以， for in 不可以
+##### 可枚举 && 可迭代
+- 1、for in 用于可枚举数据， 如对象、数组、字符串
+```javascript
+const obj = { name: 'hardy' }
+console.log(Object.getOwnPropertyDescriptors(obj));
 
+// log
+{
+  name: {
+    value: 'hardy',
+    writable: true,
+    enumerable: true,    可枚举
+    configurable: true
+  }
+}
+```
+- 2、for of 用于可迭代数据， 如数组、字符串、Map、Set （迭代器）
+```javascript
+const arr = [1, 2, 3]
+console.log(arr[Symbol.iterator]);
 
+// 浏览器输出，有个next方法， a => next => b => next => c
+arr[Symbol.iterator]()
+Array Iterator {}
+  [[Prototype]]: Array Iterator
+  next: ƒ next()
+  Symbol(Symbol.toStringTag): "Array Iterator"
+  [[Prototype]]: Object
+  Symbol(Symbol.iterator): ƒ [Symbol.iterator]()
+  [[Prototype]]: Object
+```
+#### for await of 
+- 遍历多个promise
+```javascript
+const createPromise = (num) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('success:' + num)
+    }, 500);
+  })
+}
 
+// usually
+(async function () {
+  const p1 = createPromise(100)
+  const p2 = createPromise(200)
+  const p3 = createPromise(300)
+  const r1 = await p1
+  console.log(r1);
+  const r2 = await p2
+  console.log(r2);
+  const r3 = await p3
+  console.log(r3);
+})()
 
+// but now
+(async function () {
+  let list = [createPromise(100), createPromise(200), createPromise(300)]
+  for await (let res of list) {
+    console.log(res);
+  }
+})()
+```
 
 
 
