@@ -291,6 +291,8 @@ const createPromise = (num) => {
 - 被自定义事件引用， 组件销毁时未清除
 #### 浏览器和nodejs事件循环（Eventloop）有什么区别?
 ##### 单线程和异步
+浏览器
+
 - js是单线程的（无论在浏览器还是nodejs）
 - 浏览器中js与dom渲染共用一个线程
 - 异步
@@ -298,12 +300,37 @@ const createPromise = (num) => {
   - 微任务，如promise, async/await
   - 微任务在下一轮DOM渲染之前执行， 宏任务在之后执行
 
+Nodejs:
+- 同样使用ES语法， 也是单线程， 也需要异步
+- 异步任务也分： 宏任务 + 微任务
+- 但是，它的宏任务和微任务，分不同的类型， 有不同优先级 
+> 与浏览器eventLoop的区别就是（1、类型， 2、优先级）
 
+##### ndoejs宏任务类型和优先级 1 / 2
+```bash
+Timers - setTimeout setInterval
+=> I/O callbacks - 处理网络，流，TCP的错误回调 
+=> Idle, prepare - 闲置状态(ndoejs内部使用)
+=> Poll 轮询- 执行poll中的I/O队列 
+=> Check 检查 - 存储setImmediate回调 
+=> close callbacks - 关闭回调， 如socket.on('close')
+```
+##### ndoejs微任务类型和优先级
+```bash
+包括： promise, async/await, process, nextTick
+```
+> process.nextTick优先级最高
 
-
-
-
-
+##### node event loop
+```bash
+- 执行同步代码
+- 执行微任务（process.nextTick优先级最高）
+- 按顺序执行6个类型的宏任务（每个结束时都会执行当前的微任务）
+```
+##### 结论
+- 浏览器和nodejs的event loop流程基本相同
+- nodejs宏任务和微任务分类型， 有优先级
+> 推荐使用setImmediate代替process.nextTick， 因为process.nextTick优先级最高， 如果跑了复杂度比较高的代码， 会阻塞后面代码运行
 
 
  
