@@ -1,4 +1,4 @@
-## 一、数据结构与算法
+g## 一、数据结构与算法
 ### 1、算法复杂度
 #### 什么是复杂度
 - 程序执行时需要的计算量和内存空间（和代码是否简洁无关）
@@ -264,10 +264,18 @@ const createPromise = (num) => {
   }
 })()
 ```
-
-
-
-
+#### offsetHeight, scrollHeight, clientHeight的区别
+- offsetHeight， offsetWidth: border + padding + content
+- clientHeight, clientWidth: padding + content
+- scrollHeight, scrollWidth: padding + 实际内容尺寸
+#### Vue组件通讯的方式
+- props和$emit
+- $parent
+- 自定义事件 (event-emitter)
+- $refs
+- $attr
+- provide/inject
+- Vuex
 
 
 
