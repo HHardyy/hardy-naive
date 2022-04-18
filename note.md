@@ -332,5 +332,85 @@ Timers - setTimeout setInterval
 - nodejs宏任务和微任务分类型， 有优先级
 > 推荐使用setImmediate代替process.nextTick， 因为process.nextTick优先级最高， 如果跑了复杂度比较高的代码， 会阻塞后面代码运行
 
+#### vdom （virtual dom = 虚拟dom）真的很快吗？
+- vdom并不快，js直接操作dom才是最快的
+- 但 “数据驱动视图”， 要有合适的技术方案， 不能全部都dom重建
+- vdom就是目前最合适的技术方案（并不是因为快，而是合适） 
+ #### 遍历数组，for和forEach哪个更快？
+ let demo it:
+ ```javascript
+const arr = []
+for(let i =0;i<100*10000;i++){
+  arr.push(i)
+}
+const len = arr.length
 
- 
+console.time('for');
+
+let n1 = 0
+for(let i = 0;i<len;i++) {
+  n1++
+}
+console.timeEnd('for');
+
+console.time('forEach')
+let n2 = 0
+arr.forEach(v => {
+  n2++
+}) 
+console.timeEnd('forEach')
+ ```
+ the results: 
+ ```javascript
+ for: 4.98388671875 ms
+ forEach: 27.30419921875 ms
+ ```
+ > 数据越大越明显
+
+ 结论是： 
+ - for更快
+ - forEach每次都要创建一个函数来调用， 而for不会创建函数
+ - 函数需要独立的作用域，会有额外的开销
+#### ndoejs如何开启进程， 进程如何通信？
+- 进程 (process)
+OS进行资源分配和调度的最小单位， 有独立内存空间
+
+- 线程 (thread)
+OS进行运算调度的最小单位， 共享进程内存空间
+
+结构：
+
+|-|-|-|
+|-|-|-|
+|-|进程1|-|
+|-|线程1|-|
+|-|线程2|-|
+|-|线程3|-|
+|-|线程n...|-|
+|-|-|-|
+
+|-|-|-|
+|-|-|-|
+|-|进程2|-|
+|-|线程1|-|
+|-|线程2|-|
+|-|线程3|-|
+|-|线程n...|-|
+|-|-|-|
+##### 通信 （合法通信）
+- 线程共享
+- js是单线程， 但是可以开启多个进程执行, 比如WebWorker
+> java就要考虑线程冲突
+
+##### 为什么需要多进程？
+- 多核cpu， 更适合处理多进程
+- 内存比较大， 多个进程才能更好的利用（单进程有内存上限）
+- 总之 压榨及其资源， 为了更快更省
+#### requestAnimationFrame && requestIdleCallback
+- requestAnimationFrame每次渲染完成都会执行， 高优
+- requestIdleCallback 空闲时才执行， 低优
+- 都是宏任务， 都是等待dom渲染完成才执行
+#### vue三种路由模式
+- hash
+- webHsitory
+- MemoryHistory(V4之前叫做abstract hsitory)

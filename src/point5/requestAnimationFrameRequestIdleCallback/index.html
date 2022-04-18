@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * { margin: 0; padding: 0; }
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <p>requestAnimationFrame && requestIdleCallback</p>
+  <div class="box" id="box"></div>
+  <button id="btn">click</button>
+
+  <script>
+    window.onload = function(){
+      console.info('start')
+      setTimeout(() => {
+       console.info('timeout') 
+      });
+      window.requestAnimationFrame(() => {
+        console.info('requestAnimationFrame')
+      })
+      window.requestIdleCallback(() => {
+        console.info('requestIdleCallBack')
+      })
+      console.info('end')
+    }
+
+
+
+
+    let box = document.querySelector('#box')
+    document.querySelector('#btn').addEventListener('click', function(){
+      let maxWidth = 400;
+      let currWidth = 100;
+      const addWidth = () => {
+        currWidth = currWidth + 3
+        box.style.width = `${currWidth}px`;
+
+        if (currWidth < maxWidth) {
+          // window.requestAnimationFrame(function(){
+          //   console.log('渲染一下');
+          //   addWidth()
+          // })
+
+          window.requestIdleCallback(function(){
+            console.log('渲染一下');
+            addWidth()
+          })
+        }
+      }
+      addWidth()
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>for forEach</p>
+
+  <script>
+    const arr = []
+    for(let i =0;i<100*10000;i++){
+      arr.push(i)
+    }
+    const len = arr.length
+
+    console.time('for');
+
+    let n1 = 0
+    for(let i = 0;i<len;i++) {
+      n1++
+    }
+    console.timeEnd('for');
+
+    console.time('forEach')
+    let n2 = 0
+    arr.forEach(v => {
+      n2++
+    }) 
+    console.timeEnd('forEach')
+  </script>
+</body>
+</html>
