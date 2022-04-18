@@ -414,3 +414,4 @@ OS进行运算调度的最小单位， 共享进程内存空间
 - hash
 - webHsitory
 - MemoryHistory(V4之前叫做abstract hsitory)
+> React也有三种路由模式
