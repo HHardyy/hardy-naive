@@ -415,3 +415,45 @@ OS进行运算调度的最小单位， 共享进程内存空间
 - webHsitory
 - MemoryHistory(V4之前叫做abstract hsitory)
 > React也有三种路由模式
+
+#### http和websocket有什么区别？
+#### 前端攻击常用的手段有哪些？如何预防？
+#### 请描述koa2洋葱模型？
+#### 前端性能指标
+- First Paint(FP) 输入一个url到界面渲染（初次渲染）
+- First Contentful Paint(FCP) 第一次有内容渲染
+- First Meaningful Paint 第一次有意义的渲染(FMP - 因为没有监测标准， 每个业务不一样，弃用， 改用LCP) 
+- DomContentLoaded(DCL) 页面dom加载完成
+- Largest Contentfull Paint(LCP)最大内容渲染完成
+- load(L) 
+> 工具google devtools、 lighthouse评测工具
+
+[lighthouse评测工具](https://www.npmjs.com/package/lighthouse)
+```bash
+npm install lighthouse -g
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
