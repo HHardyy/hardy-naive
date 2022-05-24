@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="box">
+    <h1>this is h1</h1>
+    <i>i</i>
+    <b>b</b>
+    <span>span</span>
+    <div>hello word <strong>stong</strong></div>
+  </div>
+
+  <script>
+    function visibal(node) {
+      // 注释
+      if (node instanceof Component) {
+        console.log('注释', node.textContent);
+      }
+      if (node instanceof Text) {
+        console.log('文本', node.textContent?.trim());
+      }
+      if (node instanceof HTMLElement) {
+        console.log('html', `<${node.targetName.toLowerCase()}>`);
+      }
+    }
+
+
+    function depthFirstTrase(node){
+      // visibal(node)
+
+      const childrenNodes = node.childrenNodes
+
+      childrenNodes.forEach(element => {
+        depthFirstTrase(element)
+      });
+    }
+
+    let node = document.querySelector('.box')
+    depthFirstTrase(node)
+  </script>
+</body>
+</html>
